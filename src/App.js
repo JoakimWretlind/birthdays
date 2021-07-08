@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import { GlobalStyle } from './globalStyle';
+import data from './components/data';
+import List from './components/List';
+import {
+  MainContainer,
+  PeopleSection,
+  MainH3,
+  ClearButton
+} from './components/style';
 
 function App() {
+  const [people, setPeople] = useState(data);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyle />
+      <MainContainer>
+        <PeopleSection>
+          <MainH3>{people.length} birthdays</MainH3>
+          <List people={people} />
+          <ClearButton onClick={() => setPeople([])}>clear all</ClearButton>
+        </PeopleSection>
+      </MainContainer>
+    </>
   );
 }
 
 export default App;
+
